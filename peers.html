@@ -4,158 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gnoland Onyx Peers - Apollo Validator</title>
-<link rel="icon" type="image/png" href="../../img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../style.css">
 <style>
-.service-section{margin-bottom:40px}
-.service-section h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:16px;padding-left:4px}
-.service-card{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:12px;text-decoration:none;color:var(--text);transition:all .3s ease}
-.service-card:hover{background:var(--surface-hover);border-color:rgba(212,168,83,0.25);transform:translateY(-4px)}
-.service-info h3{font-size:1.1rem;color:#fff;margin-bottom:4px;text-transform:none;letter-spacing:normal}
-.service-info p{color:var(--text-muted);font-size:.9rem}
-.service-card .btn{padding:10px 20px;font-size:.85rem}
-.endpoint{font-family:monospace;font-size:.8rem;color:var(--gold);margin-top:4px;word-break:break-all}
-pre{background:#111;border:1px solid #333;border-radius:8px;padding:16px;overflow-x:auto;margin:12px 0;font-size:13px;color:#a0a0a0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter",sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6}
+.container{max-width:860px;margin:0 auto;padding:40px 20px}
+h1{font-size:28px;margin-bottom:8px;color:#fff}
+h2{font-size:20px;margin:32px 0 16px;color:#fff}
+.subtitle{color:#888;margin-bottom:32px;font-size:14px}
+.back{color:#666;text-decoration:none;font-size:14px;display:inline-block;margin-bottom:24px}
+.back:hover{color:#fff}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:24px;margin-bottom:24px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222}
+.row:last-child{border-bottom:none}
+.label{color:#888}
+.value{color:#fff;font-family:monospace;word-break:break-all;text-align:right}
+.btn{display:inline-block;background:#2563eb;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;margin-top:12px;font-size:14px;cursor:pointer;border:none}
+.btn:hover{background:#1d4ed8}
+pre{background:#111;border:1px solid #333;border-radius:8px;padding:16px;overflow-x:auto;margin:12px 0;font-size:13px;color:#a0a0a0;white-space:pre-wrap;word-break:break-all}
+.note{color:#666;font-size:13px;margin-top:12px}
+.step{margin-bottom:24px}
+.step-num{display:inline-block;background:#2563eb;color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:14px;font-weight:600;margin-right:8px}
+.step-title{font-weight:600;color:#fff;font-size:16px}
 p{margin-bottom:12px;color:#ccc;font-size:14px}
 a{color:#60a5fa}
-.links{display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px}
-.link{padding:8px 16px;border-radius:8px;text-decoration:none;color:var(--text-muted);font-size:14px;font-weight:500}
-.link:hover{color:#fff}
-.link.active{background:#2563eb;color:#fff}
-.copy-btn{background:var(--surface);color:#fff;border:1px solid var(--border);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;margin-top:8px}
-.copy-btn:hover{background:var(--surface-hover)}
-.peer-list{font-family:monospace;font-size:13px;color:#a0a0a0;list-style:none;padding:0}
-.peer-list li{padding:8px 0;border-bottom:1px solid var(--border)}
-.peer-list li:last-child{border-bottom:none}
-.peer-name{color:#fff;font-weight:500}
-.peer-addr{color:var(--gold);font-size:12px}
+.links{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.link{padding:10px 20px;border-radius:8px;background:#1a1a1a;border:1px solid #333;color:#888;text-decoration:none;font-size:14px}
+.link.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.link:hover{border-color:#60a5fa;color:#fff}
+.copy-toast{display:none;background:#22c55e;color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;position:fixed;bottom:20px;right:20px;z-index:100}
 </style>
 </head>
 <body>
-<div class="sunburst"></div>
+<div class="container">
+<a href="https://apollo-validator.eu" class="back">&larr; Back to Apollo Validator</a>
+<h1>Gnoland Onyx Peers</h1>
+<p class="subtitle">Verified peer list for Gnoland Onyx testnet. Auto-updated every 6 hours with TCP verification.</p>
 
-<header style="padding:60px 20px 40px">
-    <div class="container">
-        <a href="/" style="color:var(--text-muted);text-decoration:none;font-size:.9rem;display:inline-block;margin-bottom:20px">&larr; Back to Apollo Validator</a>
-        <h1 class="glow-text" style="font-size:2.5rem">Gnoland Onyx Peers</h1>
-        <p class="subtitle">Verified peer list for Gnoland Onyx testnet. Auto-updated every 6 hours.</p>
-    </div>
-</header>
+<div class="links">
+<a href="index.html" class="link">Snapshots</a>
+<a href="peers.html" class="link active">Peers</a>
+</div>
 
-<section class="visible" style="opacity:1;transform:none;padding:0 0 80px">
-    <div class="container">
+<div class="card">
+<h2>Peer Stats</h2>
+<div class="row"><span class="label">Network</span><span class="value">Gnoland Onyx Testnet</span></div>
+<div class="row"><span class="label">Chain ID</span><span class="value">onyx-1</span></div>
+<div class="row"><span class="label">Height</span><span class="value">165,236</span></div>
+<div class="row"><span class="label">Verified Peers</span><span class="value">48/67</span></div>
+<div class="row"><span class="label">Last Updated</span><span class="value">2026-10-04 18:06 UTC</span></div>
+</div>
 
-        <div class="links">
-            <a href="index.html" class="link">Snapshots</a>
-            <a href="peers.html" class="link active">Peers</a>
-        </div>
+<div class="card">
+<h2>Quick Setup</h2>
+<div class="step"><span class="step-num">1</span><span class="step-title">Copy persistent_peers</span>
+<p>Click the button to copy the verified peers string to your clipboard.</p>
+<pre id="peers-str">g18fky8kfslt69c57mysdtw6ce823wz797t2krwz@162.250.190.214:26656,g1wfu406mz57cv2cq68agrkefd4g6pw0ew4kyvlu@65.109.50.163:54656,g1xqaljl3pty4sjath39ddq7uulsfsm977e26xsq@198.244.200.116:27656,g1n3f0hyp7yenpujjg5xhyqpp3ks5t3ja96k5cg3@0.0.0.0:26656,g1f0rqz8h3cf4gsq78cnncsfwac2ssf4cak4n95n@207.180.207.177:26656,g1fcls0k7rflrug27d50g02y2gygcfhk50w70clg@148.72.141.223:26656,g1trep88l2yex6rlklzw52zf6hhj7dcgfr4jw06h@0.0.0.0:26656,g1qkvmqn7wp6ch76zg5ady7ppgngjylhd7uucp87@0.0.0.0:26656,g1adeecqwltcvenkj842lt335d455kny92hvkhpy@0.0.0.0:26656,g14vxnkg708eguxdejukk5emq6zsmwusda8a8lle@34.248.195.29:26656,g17pujqhhnkxknjas3fteuxq6l7w8kzueq0eahkd@148.72.141.245:26672,g1vp8jzr2cr70xtcxlretm4xutvwujlpdsm89zrv@149.50.96.58:41696,g10y5062yujmr7wjf2eqqrnfzpv8c52x6epf3yf5@185.16.39.172:59656,g1fzle2wra6y2c6m3mn9u0xc534ygu37sjtf8naw@171.246.234.24:26668,g1z6npzw8p27gklxzzccsx4gq6kxkc8ve5xwatxu@52.57.210.177:26656,g17537c8pzk3y4gtam8jvk4tf8jcavy80n2zax5w@65.109.30.26:54656,g10869qdcxxsrsjqr2w4lzkutgamj9l5sr4la4rg@95.217.73.212:54656,g1jytmv9tel7esqju93xrxxq6xe8qwjvv72ngacd@152.53.48.29:27656,g1w9w8328d09la5ss8gnhk274ulx7ustzfvddm7a@5.181.187.95:26656,g19q6s7zk4u0pnazxzdz4sl3c3wavlhh048g27p0@135.181.78.21:37656,g1x5mlj5ava0dw9vkf4j6admjlzswm6f06p44krn@100.24.196.77:26656,g10s3cw8kv05zx338tkcsx438sm5p5dwmfa6jgy4@65.109.124.135:54656,g1acly3c2fsqx2zdgvwu0ljmtmjmg5cq2vqmmzlp@176.9.3.249:27656,g1dqqmysnfv38adpm8vhaurc7w48gz00y6hm65nd@0.0.0.0:26656,g15uh4xpkdhdc94gakkke2fp9svf7k4dqcf75jcl@95.111.238.100:26656,g1kwcns3j40m6ktw3ewhwlv4jk6dq8zrl33qx37v@116.202.156.139:26756,g1r6jgch2ax4kvqrtju8v3pgk5pmwe9myjle9uws@65.109.104.118:36656,g1ackmzg8myw06lfne6djqlmdw7prt477y0z5erk@162.250.190.64:26656,g1w44kfhv9a4ruqx70jxqmykychre3ffpnfje8h7@159.195.22.175:61656,g1wvqps32xgm72gwqrwklhkfu4y8fdst27tackn2@141.98.198.108:26656,g19jzk586xcle5htkndp9u0kx4hg5splw0069s6u@65.21.15.43:17656,g1vcua8y0pycjmcg5fvu2hh3azen5nf0p2smrqzs@135.181.216.107:26656,g1zl28ku25rwqu46k5vjxu398r0xf36au6ku0mww@0.0.0.0:26656,g1htn0p49j5t3l7jsxw7fe0yqxl5lehgpe73rs0f@46.232.248.39:54656,g1grq5zswt0dlwwe7clr4359w70k2ewgse0gcwck@34.247.2.14:26656,g1d0h0yuytu3c5dq2rp6hck8aeeuclaux0j3zuvd@44.196.164.168:26656,g13jnv6s5kg98ucytee0yyrcpgzkfqfsr5washk2@37.27.127.145:54656,g17t7vlg7hjvsldqj06zenkxpktzntkp62thg9a7@65.109.106.214:55686,g1ax8w67f07gq7kfhx48akhj820n9l0uumwnqy3k@65.108.198.182:26656,g1mt7ftflyxnuxks5jgcau3x3l37z2we8vvh35r3@82.27.2.106:26656,g1zjxshnsanpkn5en0ajy35upk98mctyjt6xs3yr@0.0.0.0:26656,g1rje57cc3acsnpzw6tzagpq7sudkfx8x5p25z63@217.76.62.193:26656,g1whafz2mw6zh3g6h4phvtny9gm2yy4rwmg9h7sc@88.198.67.189:29656,g10jrjsyzgm4p0hy6ewd5lkt9ztsx48lqpy6zk0q@0.0.0.0:28656,g1r93ua5fzez4gp8xpdxnxghll9supkye54k5tgd@167.86.76.130:6656,g1raankm9dxx4xm0g20666ft4x0qr09vgwlryfp2@117.1.193.44:26656,g1qss40s3c30f02z7vu52welzxmugwgrh5nzhnp2@0.0.0.0:26656,g1e3pftctakyx58mzapqs4syc4h0jcxwtnraq00c@185.248.24.16:47656</pre>
+<button class="btn" onclick="copyPeers()">Copy PEERS</button>
+</div>
+<div class="step"><span class="step-num">2</span><span class="step-title">Apply to config.toml</span>
+<pre>sed -i 's/^persistent_peers = .*/persistent_peers = "g18fky8kfslt69c57mysdtw6ce823wz797t2krwz@162.250.190.214:26656,g1wfu406mz57cv2cq68agrkefd4g6pw0ew4kyvlu@65.109.50.163:54656,g1xqaljl3pty4sjath39ddq7uulsfsm977e26xsq@198.244.200.116:27656,g1n3f0hyp7yenpujjg5xhyqpp3ks5t3ja96k5cg3@0.0.0.0:26656,g1f0rqz8h3cf4gsq78cnncsfwac2ssf4cak4n95n@207.180.207.177:26656,g1fcls0k7rflrug27d50g02y2gygcfhk50w70clg@148.72.141.223:26656,g1trep88l2yex6rlklzw52zf6hhj7dcgfr4jw06h@0.0.0.0:26656,g1qkvmqn7wp6ch76zg5ady7ppgngjylhd7uucp87@0.0.0.0:26656,g1adeecqwltcvenkj842lt335d455kny92hvkhpy@0.0.0.0:26656,g14vxnkg708eguxdejukk5emq6zsmwusda8a8lle@34.248.195.29:26656,g17pujqhhnkxknjas3fteuxq6l7w8kzueq0eahkd@148.72.141.245:26672,g1vp8jzr2cr70xtcxlretm4xutvwujlpdsm89zrv@149.50.96.58:41696,g10y5062yujmr7wjf2eqqrnfzpv8c52x6epf3yf5@185.16.39.172:59656,g1fzle2wra6y2c6m3mn9u0xc534ygu37sjtf8naw@171.246.234.24:26668,g1z6npzw8p27gklxzzccsx4gq6kxkc8ve5xwatxu@52.57.210.177:26656,g17537c8pzk3y4gtam8jvk4tf8jcavy80n2zax5w@65.109.30.26:54656,g10869qdcxxsrsjqr2w4lzkutgamj9l5sr4la4rg@95.217.73.212:54656,g1jytmv9tel7esqju93xrxxq6xe8qwjvv72ngacd@152.53.48.29:27656,g1w9w8328d09la5ss8gnhk274ulx7ustzfvddm7a@5.181.187.95:26656,g19q6s7zk4u0pnazxzdz4sl3c3wavlhh048g27p0@135.181.78.21:37656,g1x5mlj5ava0dw9vkf4j6admjlzswm6f06p44krn@100.24.196.77:26656,g10s3cw8kv05zx338tkcsx438sm5p5dwmfa6jgy4@65.109.124.135:54656,g1acly3c2fsqx2zdgvwu0ljmtmjmg5cq2vqmmzlp@176.9.3.249:27656,g1dqqmysnfv38adpm8vhaurc7w48gz00y6hm65nd@0.0.0.0:26656,g15uh4xpkdhdc94gakkke2fp9svf7k4dqcf75jcl@95.111.238.100:26656,g1kwcns3j40m6ktw3ewhwlv4jk6dq8zrl33qx37v@116.202.156.139:26756,g1r6jgch2ax4kvqrtju8v3pgk5pmwe9myjle9uws@65.109.104.118:36656,g1ackmzg8myw06lfne6djqlmdw7prt477y0z5erk@162.250.190.64:26656,g1w44kfhv9a4ruqx70jxqmykychre3ffpnfje8h7@159.195.22.175:61656,g1wvqps32xgm72gwqrwklhkfu4y8fdst27tackn2@141.98.198.108:26656,g19jzk586xcle5htkndp9u0kx4hg5splw0069s6u@65.21.15.43:17656,g1vcua8y0pycjmcg5fvu2hh3azen5nf0p2smrqzs@135.181.216.107:26656,g1zl28ku25rwqu46k5vjxu398r0xf36au6ku0mww@0.0.0.0:26656,g1htn0p49j5t3l7jsxw7fe0yqxl5lehgpe73rs0f@46.232.248.39:54656,g1grq5zswt0dlwwe7clr4359w70k2ewgse0gcwck@34.247.2.14:26656,g1d0h0yuytu3c5dq2rp6hck8aeeuclaux0j3zuvd@44.196.164.168:26656,g13jnv6s5kg98ucytee0yyrcpgzkfqfsr5washk2@37.27.127.145:54656,g17t7vlg7hjvsldqj06zenkxpktzntkp62thg9a7@65.109.106.214:55686,g1ax8w67f07gq7kfhx48akhj820n9l0uumwnqy3k@65.108.198.182:26656,g1mt7ftflyxnuxks5jgcau3x3l37z2we8vvh35r3@82.27.2.106:26656,g1zjxshnsanpkn5en0ajy35upk98mctyjt6xs3yr@0.0.0.0:26656,g1rje57cc3acsnpzw6tzagpq7sudkfx8x5p25z63@217.76.62.193:26656,g1whafz2mw6zh3g6h4phvtny9gm2yy4rwmg9h7sc@88.198.67.189:29656,g10jrjsyzgm4p0hy6ewd5lkt9ztsx48lqpy6zk0q@0.0.0.0:28656,g1r93ua5fzez4gp8xpdxnxghll9supkye54k5tgd@167.86.76.130:6656,g1raankm9dxx4xm0g20666ft4x0qr09vgwlryfp2@117.1.193.44:26656,g1qss40s3c30f02z7vu52welzxmugwgrh5nzhnp2@0.0.0.0:26656,g1e3pftctakyx58mzapqs4syc4h0jcxwtnraq00c@185.248.24.16:47656"/' ~/gno-onyx/gnoland-data/config/config.toml</pre>
+</div>
+<div class="step"><span class="step-num">3</span><span class="step-title">Restart node</span>
+<pre>sudo systemctl restart gnoland-onyx</pre>
+</div>
+</div>
 
-        <div class="service-section">
-            <h3>Peer Info</h3>
-            <div class="service-card" style="cursor:default">
-                <div class="service-info">
-                    <h3 id="peers-count">Loading...</h3>
-                    <p id="peers-info">Fetching peer data...</p>
-                </div>
-            </div>
-        </div>
+<div class="card">
+<h2>Seeds</h2>
+<p>Official Onyx seed nodes (use if you have no peers yet):</p>
+<pre id="seeds-str">g1x5mlj5ava0dw9vkf4j6admjlzswm6f06p44krn@seed-1.onyx.testnets.gno.land:26656,g1grq5zswt0dlwwe7clr4359w70k2ewgse0gcwck@seed-2.onyx.testnets.gno.land:26656</pre>
+<button class="btn" onclick="copySeeds()">Copy SEEDS</button>
+</div>
 
-        <div class="service-section">
-            <h3>Persistent Peers</h3>
-            <div class="service-card" style="cursor:default;flex-direction:column;align-items:flex-start">
-                <div class="service-info" style="width:100%">
-                    <h3>Add to config.toml</h3>
-                    <pre id="persistent-peers">Loading...</pre>
-                    <button class="copy-btn" onclick="copyPeers()">Copy to clipboard</button>
-                </div>
-            </div>
-        </div>
+<div class="card">
+<h2>Manual Query</h2>
+<p>Get fresh peers from our API:</p>
+<pre>curl -s https://snapshots.apollo-validator.eu/gnoland-onyx/peers.md</pre>
+</div>
 
-        <div class="service-section">
-            <h3>Official Seeds</h3>
-            <div class="service-card" style="cursor:default;flex-direction:column;align-items:flex-start">
-                <div class="service-info" style="width:100%">
-                    <h3>Seed Nodes</h3>
-                    <pre>g1x5mlj5ava0dw9vkf4j6admjlzswm6f06p44krn@seed-1.onyx.testnets.gno.land:26656
-g1grq5zswt0dlwwe7clr4359w70k2ewgse0gcwck@seed-2.onyx.testnets.gno.land:26656</pre>
-                </div>
-            </div>
-        </div>
+<p class="note">Peers are TCP-verified every 6 hours. Only reachable peers are included. Powered by Apollo Validator.</p>
+</div>
 
-        <div class="service-section">
-            <h3>Peer Details</h3>
-            <div class="service-card" style="cursor:default;flex-direction:column;align-items:flex-start">
-                <div class="service-info" style="width:100%">
-                    <h3>Connected Peers</h3>
-                    <ul class="peer-list" id="peer-details">Loading...</ul>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>&copy; 2026 Apollo Validator</p>
-    </div>
-</footer>
+<div class="copy-toast" id="toast">Copied!</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-    fetch('/gnoland-onyx/peers.md')
-        .then(r => r.text())
-        .then(md => {
-            const lines = md.split('\n');
-            let peers = [];
-            let persistentPeers = '';
-            let height = '';
-            let count = '';
-
-            for (const line of lines) {
-                if (line.startsWith('**Height:**')) height = line.replace('**Height:**', '').trim();
-                if (line.startsWith('**Peers:**')) count = line.replace('**Peers:**', '').trim();
-                if (line.startsWith('```') && !persistentPeers) {
-                    const idx = lines.indexOf(line);
-                    if (idx > 0) persistentPeers = lines[idx + 1] || '';
-                }
-                if (line.startsWith('- `') && line.includes('@')) {
-                    const match = line.match(/`(.+?)\s+#\s+(.+?)`/);
-                    if (match) peers.push({addr: match[1], name: match[2]});
-                }
-            }
-
-            document.getElementById('peers-count').textContent = count + ' Peers at Height ' + (height ? parseInt(height.replace(/,/g, '')).toLocaleString() : 'N/A');
-            document.getElementById('peers-info').textContent = 'Chain ID: onyx-1 | Auto-updated every 6 hours';
-            document.getElementById('persistent-peers').textContent = persistentPeers || 'N/A';
-
-            const ul = document.getElementById('peer-details');
-            ul.innerHTML = peers.map(p =>
-                '<li><span class="peer-name">' + p.name + '</span><br><span class="peer-addr">' + p.addr + '</span></li>'
-            ).join('');
-        })
-        .catch(() => {
-            document.getElementById('peers-count').textContent = 'Peers data unavailable';
-        });
-});
-
 function copyPeers() {
-    const text = document.getElementById('persistent-peers').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy to clipboard', 2000);
-    });
+    navigator.clipboard.writeText(document.getElementById('peers-str').textContent).then(() => showToast());
+}
+function copySeeds() {
+    navigator.clipboard.writeText(document.getElementById('seeds-str').textContent).then(() => showToast());
+}
+function showToast() {
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 2000);
 }
 </script>
 </body>
