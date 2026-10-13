@@ -113,14 +113,18 @@ Full list: [peers.md](peers.md) · HTML: [peers.html](https://snapshots.apollo-v
 
 ### Quick Setup
 
-```bash
-# Copy the persistent_peers line from peers.md
-# Edit ~/gno-onyx/gnoland-data/config/config.toml
-persistent_peers = "<peers_from_peers.md>"
+<!-- PEERS:BEGIN -->
+Auto-updated every 6 hours · last run: pending
 
-# Restart node
+```bash
+PEERS="<run peers-gen to fill>"
+
+cd ~/gno-onyx/gnoland-data
+gnoland config set p2p.persistent_peers "$PEERS" --config-path config/config.toml
+
 sudo systemctl restart gnoland-onyx
 ```
+<!-- PEERS:END -->
 
 ### Official Seeds
 
