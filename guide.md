@@ -27,23 +27,23 @@ source ~/.bashrc
 ## 2. Download Binary and GNOROOT
 
 Onyx runs mainnet code one release candidate ahead. Pin the exact version
-from the last row of `misc/deployments/onyx.gno.land/UPGRADES.md` (currently **v1.5.0**).
+from the last row of `misc/deployments/onyx.gno.land/UPGRADES.md` (currently **v1.6.0-rc.1**).
 Never build from master — use the release tag.
 
 ```bash
 # Prebuilt binary
 mkdir -p ~/go-onyx/bin
 wget -O ~/go-onyx/bin/gnoland \
-  https://github.com/gnolang/gno/releases/download/v1.5.0/gnoland_linux_amd64
+  https://github.com/gnolang/gno/releases/download/v1.6.0-rc.1/gnoland_linux_amd64
 chmod +x ~/go-onyx/bin/gnoland
 
 # Verify
 ~/go-onyx/bin/gnoland version
-# gnoland version: v1.5.0
+# gnoland version: v1.6.0-rc.1
 
 # GNOROOT — checkout of the same tag (node reads gnovm/stdlibs from it)
 git clone https://github.com/gnolang/gno.git ~/gno-onyx-src
-cd ~/gno-onyx-src && git checkout v1.5.0
+cd ~/gno-onyx-src && git checkout v1.6.0-rc.1
 ```
 
 ## 3. Download Genesis
@@ -223,7 +223,30 @@ gnokey query --remote tcp://127.0.0.1:47657 auth/accounts/YOUR_G1_ADDRESS
 ## Upgrading
 
 Onyx is upgraded whenever mainnet is. Check the last row of
-`misc/deployments/onyx.gno.land/UPGRADES.md` for the required version, then:
+`misc/deployments/onyx.gno.land/UPGRADES.md` for the required version.
+
+### Coordinated halt upgrade (example: v1.6.0-rc.1, 2026-10-16)
+
+Some upgrades halt the chain at a fixed block instead of rolling over
+(this one: **block 445000**, GovDAO proposal #33,
+https://github.com/gnolang/gno/issues/6372):
+
+- **Leave `halt_height` at 0** in `config.toml` — the node halts at the target
+  block on its own.
+- The new version **refuses to start BEFORE the halt**: download or build it
+  in advance, but restart the service only after the chain has halted.
+- Move the GNOROOT checkout **after the halt as well** — the running node
+  reads `gnovm/stdlibs` from GNOROOT; swapping them mid-run can cause
+  app-hash divergence.
+- You are not blocking anyone: once >2/3 of voting power runs the new
+  version the chain resumes by itself and your node catches up.
+- Docker alternative: `ghcr.io/gnolang/gno/gnoland:v1.6.0-rc.1`
+  (image digest `sha256:4286ffcd805f7a4925cc15ad2290d4be0e1c28f63436bf7b0ed4570ff38e7e38`),
+  verify with the `cosign verify` command from the release announcement.
+- Plain `gnoland` needs no config change; `gnoweb` gained new flags in this
+  release — apply them after the halt (only relevant if you run gnoweb).
+
+### Standard upgrade
 
 ```bash
 sudo systemctl stop gnoland-onyx

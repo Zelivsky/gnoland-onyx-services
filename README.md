@@ -143,16 +143,16 @@ Full guide: [guide.md](guide.md)
 ### Quick Start
 
 ```bash
-# Download binary (pin version from UPGRADES.md — currently v1.5.0)
+# Download binary (pin version from UPGRADES.md — currently v1.6.0-rc.1)
 mkdir -p ~/go-onyx/bin
 wget -O ~/go-onyx/bin/gnoland \
-  https://github.com/gnolang/gno/releases/download/v1.5.0/gnoland_linux_amd64
+  https://github.com/gnolang/gno/releases/download/v1.6.0-rc.1/gnoland_linux_amd64
 chmod +x ~/go-onyx/bin/gnoland
 ~/go-onyx/bin/gnoland version
 
 # GNOROOT — checkout of the same tag
 git clone https://github.com/gnolang/gno.git ~/gno-onyx-src
-cd ~/gno-onyx-src && git checkout v1.5.0
+cd ~/gno-onyx-src && git checkout v1.6.0-rc.1
 
 # Download genesis
 mkdir -p ~/gno-onyx/gnoland-data
@@ -214,7 +214,7 @@ you add with `/add` — on every network where that validator is active.
 | Parameter | Value |
 |---|---|
 | Chain ID | onyx-1 |
-| Binary | v1.5.0 (pin from UPGRADES.md) |
+| Binary | v1.6.0-rc.1 (pin from UPGRADES.md) |
 | Genesis | [Download](https://github.com/gnolang/gno/releases/download/chain/onyx/genesis.json) |
 | Genesis SHA256 | `4b006fd7ccdec052865accc84dd29b2b76f8b57b2560789a15eedaa88f0e26c5` |
 | P2P Port | 47656 |
