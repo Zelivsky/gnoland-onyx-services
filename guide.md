@@ -5,7 +5,7 @@
 This guide covers setting up a Gnoland Onyx testnet node and registering as a validator candidate.
 
 **Network:** Onyx (onyx-1)
-**Branch:** mainnet code, pinned to release tag (e.g. v1.5.0)
+**Branch:** mainnet code, pinned to release tag (e.g. v1.6.0-rc.1)
 **Ports:** 47xxx (P2P: 47656, RPC: 47657, ABCI: 47658)
 
 ## Prerequisites
